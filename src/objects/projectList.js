@@ -6,7 +6,7 @@ function addProject(project){
     projects.push(project);
 }
 
-function getProjects(){
+function getAllProjects(){
     return projects;
 }
 
@@ -20,16 +20,21 @@ function getProject(projName){
     return p;
 }
 
-function displayAllToDo(){
-    projects.forEach(project => {
-        project.toDoList.forEach(todo => {
-            uiFN.renderTodo(todo);
-        });
-    });
-}
+// function displayAllToDo(){
+//     projects.forEach(project => {
+//         project.toDoList.forEach(todo => {
+//             //uiFN.renderTodo(todo);
+//         });
+//     });
+// }
+// function displayAllProjects(){
+//     projects.forEach(project => {
+//        // uiFN.renderProjects(project);
+//     });
+// }
 
 function removeProject(projName){
 
 }
 
-export {addProject, getProject, getProjects, displayAllToDo, removeProject};
+export {addProject, getProject, getAllProjects, removeProject};
