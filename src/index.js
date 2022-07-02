@@ -6,7 +6,6 @@ import * as listFN from "./objects/projectList";
 function initialPageLoad(){
     uiFN.renderAllTodo();
 
-    uiFN.createAddToDoBtn();
     uiFN.renderAllProjects();
 
 }

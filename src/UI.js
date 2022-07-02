@@ -4,8 +4,16 @@ import * as List from "./objects/projectList";
 
 const content = document.querySelector(".content");
 const modal = document.querySelector("#modal");
+const projectModal = document.querySelector("#project-modal");
+const taskModal = document.querySelector("#task-modal");
 const addTaskBtn = document.querySelector("#add-task");
+
 const todoContainer = document.querySelector(".task-container");
+
+const projectBtn = document.querySelector(".sidebar-project");
+const addProjectBtn = document.querySelector("#add-project");
+
+
 
 function renderAllTodo(){
     const projects = List.getAllProjects();
@@ -21,7 +29,7 @@ function appendTodo(todo){
     const toDoDiv = document.createElement("div");
     const toDoName = document.createElement("h3");
     const toDoDesc = document.createElement("p");
-
+    toDoDiv.classList.add("task");
     toDoName.textContent = todo.name;
     toDoDesc.textContent = todo.description;
 
@@ -64,15 +72,24 @@ function createAddToDoBtn(){
     const toDoBtn = document.createElement("button");
     toDoBtn.textContent = "+ Add Task";
     toDoBtn.id ="addTask";
-    content.appendChild(toDoBtn);
+    todoContainer.appendChild(toDoBtn);
 }
 
 function showTaskModal(){
+
     modal.style.display = "block";
+    taskModal.style.display = "block";
+}
+
+function showProjectModal(){
+    modal.style.display = "block";
+   projectModal.style.display = "block";
 }
 
 function hideTaskModal(){
     modal.style.display = "none";
+    taskModal.style.display = "none";
+    projectModal.style.display = "none";
 }
 
 function clearContent(){
@@ -114,6 +131,22 @@ addTaskBtn.addEventListener("click" ,() =>{
     List.getProject("TEST1").addToDo(newTask);
     appendTodo(newTask);
     hideTaskModal();
+
+});
+
+
+
+projectBtn.addEventListener("click", () =>{
+    showProjectModal();
+});
+
+addProjectBtn.addEventListener("click",() =>{
+    
+    const newProject = new Project("Test5", "Descritption");
+    List.addProject(newProject);
+    appendProject(newProject);
+    hideTaskModal();
+
 
 });
 
