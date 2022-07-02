@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    outline: 1px solid black;
+    border: 1px solid black;
 }
 
 body{
@@ -18,6 +18,10 @@ html, body {
     display: flex;
 }
 
+/* Header Styles */
+.header{
+    padding: 15px;
+}
 
 /* Modal Styles */
 
@@ -26,17 +30,26 @@ html, body {
     position: fixed;
     z-index: 1;
     padding-top: 100px;
-    left: 0;
-    top: 0;
     width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0); 
+    height: 100%; 
     background-color: rgba(0,0,0,0.4); 
 }
 
 #task-modal,#project-modal{
     display: none;
+    background-color: white;
+    overflow: auto;
+    margin: 0px auto;
+    padding: 25px;
+    width: 35%;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.task-input{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
 }
 
 /* Main Content Box Style */
@@ -63,7 +76,7 @@ html, body {
     display: grid;
     grid-template-rows: repeat(auto-fill, minmax(75px,1fr));
     gap: 20px;
-    margin-top: 25px;
+    padding-top: 25px;
 }
 
 .task{
@@ -72,6 +85,14 @@ html, body {
     flex-direction: column;
     justify-self: center;
 }
+
+.task-title{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+
 
 
 /* Sidebar Styles */
