@@ -16,6 +16,7 @@ const addProjectBtn = document.querySelector("#add-project");
 
 
 function renderAllTodo(){
+    //Gets all todos from project list and calls the append function to appends to task container
     const projects = List.getAllProjects();
     projects.forEach(project => {
         project.toDoList.forEach(todo => {
@@ -26,14 +27,26 @@ function renderAllTodo(){
 }
 
 function appendTodo(todo){
+    //Takes a single todo and appends to the task container div.
+
     const toDoDiv = document.createElement("div");
+    const toDoTitleDiv = document.createElement("div");
+    const closeBtn = document.createElement("span");
+
     const toDoName = document.createElement("h3");
     const toDoDesc = document.createElement("p");
+    
     toDoDiv.classList.add("task");
+    toDoTitleDiv.classList.add("task-title");
+
     toDoName.textContent = todo.name;
     toDoDesc.textContent = todo.description;
+    closeBtn.innerHTML = "&times"; 
 
-    toDoDiv.appendChild(toDoName);
+    toDoTitleDiv.appendChild(toDoName);
+    toDoTitleDiv.appendChild(closeBtn);
+
+    toDoDiv.appendChild(toDoTitleDiv);
     toDoDiv.appendChild(toDoDesc);
 
     todoContainer.appendChild(toDoDiv);
@@ -51,6 +64,7 @@ function renderAllProjects(){
 }
 
 function appendProject(project){
+    // Append single project to sidebar
     const projectList = document.createElement("li");
     const projectName = document.createElement("h5");
     const projectContainer = document.querySelector(".projects-container");
@@ -76,14 +90,15 @@ function createAddToDoBtn(){
 }
 
 function showTaskModal(){
-
+    projectModal.style.display = "none";
     modal.style.display = "block";
     taskModal.style.display = "block";
 }
 
 function showProjectModal(){
+    taskModal.style.display = "none";
     modal.style.display = "block";
-   projectModal.style.display = "block";
+    projectModal.style.display = "block";
 }
 
 function hideTaskModal(){
@@ -93,9 +108,22 @@ function hideTaskModal(){
 }
 
 function clearContent(){
+    //Clears all tasks
     while (todoContainer.firstChild){
         todoContainer.removeChild(todoContainer.lastChild);
     }
+}
+
+function getTaskInputs(){
+    const taskName = document.querySelector("#");
+    const taskDescription = document.querySelector("#");
+    const taskDate = document.querySelector("#");
+    const taskUrgency = document.querySelector("#");
+    const taskNotes = document.querySelector("#");
+
+    
+
+
 }
 
 document.addEventListener("click", function(e){

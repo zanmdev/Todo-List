@@ -11,9 +11,35 @@
 
     <div id="modal">
         <div id="task-modal">
-            <button id="add-task">+Add Task</button>
+            <form class="task-form">
+                <div class="task-input">
+                    <label for="task-name">Task Name:</label>
+                    <input id="task-name" type="text">
+                </div>
+                <div class="task-input">
+                    <label for="task-description">Task Description:</label>
+                    <input id="task-description" type="text">
+                </div>
+                <div class="task-input">
+                    <label for="task-due">Task Due-Date:</label>
+                    <input id = "task-due" type="date">
+                </div>
+                <div class="task-input">
+                    <label for="task-urgency">Urgency Level</label>
+                    <input id = "task-urgency" type="text">
+                </div>
+                <div class="task-input">
+                    <label for="task-notes">Notes:</label>
+                    <textarea  id="task-notes" cols="30" rows="10"></textarea>
+                </div>
+                  
+            </form>
+            <button id="add-task">+Add Task</button>  
+            
         </div>
+
         <div id ="project-modal">
+            
             <button id="add-project">+Add Project</button>
         </div>
     </div>
