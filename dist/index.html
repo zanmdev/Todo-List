@@ -20,14 +20,15 @@
                     <label for="task-description">Task Description:</label>
                     <input id="task-description" type="text">
                 </div>
-                <div class="task-input">
-                    <label for="task-due">Task Due-Date:</label>
+                <div class="task-input row3">
+
+                    <label for="task-due">Due-Date:</label>
                     <input id = "task-due" type="date">
-                </div>
-                <div class="task-input">
+
                     <label for="task-urgency">Urgency Level</label>
-                    <input id = "task-urgency" type="text">
+                    <input id = "task-urgency" type="number" min="1" max="3" placeholder="1">
                 </div>
+
                 <div class="task-input">
                     <label for="task-notes">Notes:</label>
                     <textarea  id="task-notes" cols="30" rows="10"></textarea>

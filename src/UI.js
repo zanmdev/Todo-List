@@ -114,14 +114,19 @@ function clearContent(){
     }
 }
 
-function getTaskInputs(){
-    const taskName = document.querySelector("#");
-    const taskDescription = document.querySelector("#");
-    const taskDate = document.querySelector("#");
-    const taskUrgency = document.querySelector("#");
-    const taskNotes = document.querySelector("#");
+function addTaskInput(){
+    const taskName = document.querySelector("#task-name");
+    const taskDescription = document.querySelector("#task-description");
+    const taskDate = document.querySelector("#task-due");
+    const taskUrgency = document.querySelector("#task-urgency");
+    const taskNotes = document.querySelector("#task-notes");
 
-    
+    let project = List.getProject("PROJ2");
+    let newTodo = new Todo(taskName, taskDescription, taskDate, taskUrgency, taskNotes);
+    project.addToDo(newTodo);
+
+
+
 
 
 }
