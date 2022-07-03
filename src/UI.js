@@ -35,6 +35,8 @@ function appendTodo(todo){
 
     const toDoName = document.createElement("h3");
     const toDoDesc = document.createElement("p");
+    const toDoDue = document.createElement("p");
+
     
     toDoDiv.classList.add("task");
     toDoTitleDiv.classList.add("task-title");
@@ -42,12 +44,15 @@ function appendTodo(todo){
     toDoName.textContent = todo.name;
     toDoDesc.textContent = todo.description;
     closeBtn.innerHTML = "&times"; 
+    toDoDue.textContent = todo.dueDate;
 
+    
     toDoTitleDiv.appendChild(toDoName);
     toDoTitleDiv.appendChild(closeBtn);
 
     toDoDiv.appendChild(toDoTitleDiv);
     toDoDiv.appendChild(toDoDesc);
+    toDoDiv.appendChild(toDoDue);
 
     todoContainer.appendChild(toDoDiv);
 }
@@ -135,11 +140,15 @@ function addProjectInput(){
     const projectName = document.querySelector("#project-name");
     const projectDescription = document.querySelector("#project-description");
     
-    const newProject = new Project(projectName.value, projectDescription.value);
+    if(List.hasProject(projectName.value) == false){
+        const newProject = new Project(projectName.value, projectDescription.value);
+        List.addProject(newProject);
+        appendProject(newProject);
+        hideTaskModal();
+    }else{
+        alert("Project Already Exists");
+    }
 
-    List.addProject(newProject);
-    appendProject(newProject);
-    hideTaskModal();
     
 }
 

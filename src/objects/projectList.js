@@ -11,30 +11,27 @@ function getAllProjects(){
 }
 
 function getProject(projName){
-    let p;
-    projects.forEach(project => {
-        if (projName === project.name){
-            p = project
+    for (let index = 0; index < projects.length; index++) {
+
+        if (projName === projects[index].name){
+            return projects[index];
         }
-    });
-    return p;
+    }
 }
 
-// function displayAllToDo(){
-//     projects.forEach(project => {
-//         project.toDoList.forEach(todo => {
-//             //uiFN.renderTodo(todo);
-//         });
-//     });
-// }
-// function displayAllProjects(){
-//     projects.forEach(project => {
-//        // uiFN.renderProjects(project);
-//     });
-// }
+function hasProject(projName){
+    for (let index = 0; index < projects.length; index++) {
+
+        if (projName === projects[index].name){
+            return projects[index];
+        }
+    }
+    return false;
+}
+
 
 function removeProject(projName){
 
 }
 
-export {addProject, getProject, getAllProjects, removeProject};
+export {addProject, getProject, getAllProjects, hasProject,removeProject};
