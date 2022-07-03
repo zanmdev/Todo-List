@@ -46,7 +46,7 @@ html, body {
     font-weight: bold;
 }
 
-.task-input{
+.task-input, .project-input{
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
