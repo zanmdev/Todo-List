@@ -56,8 +56,10 @@ function renderAllProjects(){
     //Append Projects DOM to Sidebar 
     const projects = List.getAllProjects();
     projects.forEach(project => {
-        console.log(project);
-        appendProject(project); 
+        if(project.name !="Inbox"){
+            appendProject(project); 
+        }
+        
     });
     
     
@@ -66,14 +68,10 @@ function renderAllProjects(){
 function appendProject(project){
     // Append single project to sidebar
     const projectList = document.createElement("li");
-    const projectName = document.createElement("h5");
     const projectContainer = document.querySelector(".projects-container");
 
-    projectName.classList.add("project-tab");
-
-    projectName.textContent = project.name;
-
-    projectList.appendChild(projectName);
+    projectList.classList.add("project-tab");
+    projectList.textContent = project.name;
 
     projectContainer.appendChild(projectList);
 
@@ -121,15 +119,18 @@ function addTaskInput(){
     const taskUrgency = document.querySelector("#task-urgency");
     const taskNotes = document.querySelector("#task-notes");
 
-    let project = List.getProject("PROJ2");
-    let newTodo = new Todo(taskName, taskDescription, taskDate, taskUrgency, taskNotes);
-    project.addToDo(newTodo);
 
 
+    let activeProject = document.querySelector(".sidebar > div > ul > li.active");
 
-
-
+    let project = List.getProject(activeProject.textContent);
+    let newTask = new Todo(taskName.value, taskDescription.value, taskDate.value, taskUrgency.value, taskNotes.value);
+    console.log(project);
+    project.addToDo(newTask);
+    appendTodo(newTask);
+    hideTaskModal();
 }
+
 
 document.addEventListener("click", function(e){
     if(e.target && e.target.id == "addTask"){
@@ -144,10 +145,14 @@ document.addEventListener("click", function(e){
 
     if(e.target.classList[0] == "project-tab"){   
         clearContent();
+        
+        let sidebar = document.querySelector(".sidebar > div > ul > li.active");
+        sidebar.classList.remove("active");
+    
+        e.target.classList.add("active");    
         let project = List.getProject(e.target.textContent);
 
         project.toDoList.forEach(todo => {
-            
             appendTodo(todo);
         });
         
@@ -155,17 +160,15 @@ document.addEventListener("click", function(e){
 
     if(e.target.classList[0] == "inbox"){
         clearContent();
+        let sidebar = document.querySelector(".sidebar > div > ul > li.active");
+        sidebar.classList.remove("active");
+    
+        e.target.classList.add("active");    
         renderAllTodo();
     }
 });
 
-addTaskBtn.addEventListener("click" ,() =>{
-    const newTask = new Todo("T3", "DESC");
-    List.getProject("TEST1").addToDo(newTask);
-    appendTodo(newTask);
-    hideTaskModal();
-
-});
+addTaskBtn.addEventListener("click" , addTaskInput);
 
 
 
