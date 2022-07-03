@@ -52,6 +52,12 @@ html, body {
     margin-bottom: 15px;
 }
 
+/* Task Modal: to keep date and urgency on the same line */
+.row3{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 /* Main Content Box Style */
 
 .main {
