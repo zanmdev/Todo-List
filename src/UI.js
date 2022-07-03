@@ -131,6 +131,18 @@ function addTaskInput(){
     hideTaskModal();
 }
 
+function addProjectInput(){
+    const projectName = document.querySelector("#project-name");
+    const projectDescription = document.querySelector("#project-description");
+    
+    const newProject = new Project(projectName.value, projectDescription.value);
+
+    List.addProject(newProject);
+    appendProject(newProject);
+    hideTaskModal();
+    
+}
+
 
 document.addEventListener("click", function(e){
     if(e.target && e.target.id == "addTask"){
@@ -176,15 +188,7 @@ projectBtn.addEventListener("click", () =>{
     showProjectModal();
 });
 
-addProjectBtn.addEventListener("click",() =>{
-    
-    const newProject = new Project("Test5", "Descritption");
-    List.addProject(newProject);
-    appendProject(newProject);
-    hideTaskModal();
-
-
-});
+addProjectBtn.addEventListener("click",addProjectInput);
 
 
 
