@@ -1,5 +1,5 @@
 class Project {
- 
+
     constructor(projName, projDesc, todos = []){
         this.name = projName
         this.description = projDesc
@@ -8,6 +8,10 @@ class Project {
 
     addToDo(todo){
         this.toDoList.push(todo);
+    }
+
+    removeToDo(todo){
+
     }
 
 

@@ -11,27 +11,17 @@ function getAllProjects(){
 }
 
 function getProject(projName){
-    for (let index = 0; index < projects.length; index++) {
-
-        if (projName === projects[index].name){
-            return projects[index];
-        }
-    }
-}
-
-function hasProject(projName){
-    for (let index = 0; index < projects.length; index++) {
-
-        if (projName === projects[index].name){
-            return projects[index];
-        }
-    }
-    return false;
+    return projects.find( ({ name }) => name === projName );
 }
 
 
 function removeProject(projName){
-
+    for (let index = 0; index < projects.length; index++) {
+        if(projName === projects[index].name){
+            projects.splice(index, 1)
+            index--
+        }
+    }
 }
 
-export {addProject, getProject, getAllProjects, hasProject,removeProject};
+export {addProject, getProject, getAllProjects,removeProject};

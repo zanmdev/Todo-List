@@ -15,6 +15,8 @@ const addProjectBtn = document.querySelector("#add-project");
 
 
 
+
+
 function renderAllTodo(){
     //Gets all todos from project list and calls the append function to appends to task container
     const projects = List.getAllProjects();
@@ -73,10 +75,14 @@ function renderAllProjects(){
 function appendProject(project){
     // Append single project to sidebar
     const projectList = document.createElement("li");
+    const closeSpan = document.createElement("span");
     const projectContainer = document.querySelector(".projects-container");
-
+    
+    closeSpan.innerHTML = "&times";
+    closeSpan.classList.add("remove-project");
     projectList.classList.add("project-tab");
     projectList.textContent = project.name;
+    projectList.appendChild(closeSpan);
 
     projectContainer.appendChild(projectList);
 
@@ -128,7 +134,7 @@ function addTaskInput(){
 
     let activeProject = document.querySelector(".sidebar > div > ul > li.active");
 
-    let project = List.getProject(activeProject.textContent);
+    let project = List.getProject(activeProject.firstChild.textContent);
     let newTask = new Todo(taskName.value, taskDescription.value, taskDate.value, taskUrgency.value, taskNotes.value);
     console.log(project);
     project.addToDo(newTask);
@@ -140,7 +146,7 @@ function addProjectInput(){
     const projectName = document.querySelector("#project-name");
     const projectDescription = document.querySelector("#project-description");
     
-    if(List.hasProject(projectName.value) == false){
+    if(List.getProject(projectName.value) === undefined){
         const newProject = new Project(projectName.value, projectDescription.value);
         List.addProject(newProject);
         appendProject(newProject);
@@ -165,13 +171,16 @@ document.addEventListener("click", function(e){
     }
 
     if(e.target.classList[0] == "project-tab"){   
+        
         clearContent();
         
         let sidebar = document.querySelector(".sidebar > div > ul > li.active");
+
         sidebar.classList.remove("active");
     
-        e.target.classList.add("active");    
-        let project = List.getProject(e.target.textContent);
+        e.target.classList.add("active");   
+        let project = List.getProject(e.target.firstChild.textContent);
+
 
         project.toDoList.forEach(todo => {
             appendTodo(todo);
@@ -179,13 +188,18 @@ document.addEventListener("click", function(e){
         
     }
 
-    if(e.target.classList[0] == "inbox"){
+    if(e.target.classList.contains("inbox")){
         clearContent();
         let sidebar = document.querySelector(".sidebar > div > ul > li.active");
         sidebar.classList.remove("active");
     
         e.target.classList.add("active");    
         renderAllTodo();
+    }
+
+    if(e.target.classList.contains("remove-project")){
+        List.removeProject(e.target.parentElement.firstChild.textContent);
+        e.target.parentElement.remove();     
     }
 });
 
@@ -198,7 +212,6 @@ projectBtn.addEventListener("click", () =>{
 });
 
 addProjectBtn.addEventListener("click",addProjectInput);
-
 
 
 
