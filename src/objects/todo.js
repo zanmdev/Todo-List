@@ -1,15 +1,11 @@
 class ToDo {
  
-    constructor(toDoName, toDoDescription, toDoDueDate, urgentLvl,toDoNotes = []){
+    constructor(toDoName, toDoDescription, toDoDueDate, urgentLvl){
         this.name = toDoName
         this.description = toDoDescription
         this.dueDate = toDoDueDate;
         this.urgency = urgentLvl;
-        this.notes = toDoNotes;
-    }
 
-    addNote(note){
-        this.notes.push(note);
     }
 
 }

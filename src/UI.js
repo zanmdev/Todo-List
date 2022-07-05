@@ -43,11 +43,17 @@ function appendTodo(todo){
     toDoDiv.classList.add("task");
     toDoTitleDiv.classList.add("task-title");
     closeBtn.classList.add("remove-task");
+    
 
     toDoName.textContent = todo.name;
     toDoDesc.textContent = todo.description;
     closeBtn.innerHTML = "&times"; 
     toDoDue.textContent = todo.dueDate;
+    console.log(todo.taskUrgency);
+    if(todo.urgency == 3){
+        toDoDiv.classList.add("u3");
+
+    }
 
     
     toDoTitleDiv.appendChild(toDoName);
@@ -56,6 +62,7 @@ function appendTodo(todo){
     toDoDiv.appendChild(toDoTitleDiv);
     toDoDiv.appendChild(toDoDesc);
     toDoDiv.appendChild(toDoDue);
+
 
     todoContainer.appendChild(toDoDiv);
 }
@@ -129,14 +136,14 @@ function addTaskInput(){
     const taskDescription = document.querySelector("#task-description");
     const taskDate = document.querySelector("#task-due");
     const taskUrgency = document.querySelector("#task-urgency");
-    const taskNotes = document.querySelector("#task-notes");
+
 
 
 
     let activeProject = document.querySelector(".sidebar > div > ul > li.active");
 
     let project = List.getProject(activeProject.firstChild.textContent);
-    let newTask = new Todo(taskName.value, taskDescription.value, taskDate.value, taskUrgency.value, taskNotes.value);
+    let newTask = new Todo(taskName.value, taskDescription.value, taskDate.value, taskUrgency.value);
     console.log(project);
     project.addToDo(newTask);
     appendTodo(newTask);
@@ -166,6 +173,7 @@ function clearSidebarActiveState(){
     }
 }
 
+
 document.addEventListener("click", function(e){
     if(e.target && e.target.id == "addTask"){
         //Open Add Task modal.
@@ -177,7 +185,7 @@ document.addEventListener("click", function(e){
         hideTaskModal();
     }
 
-    if(e.target.classList[0] == "project-tab"){   
+    if(e.target.classList.contains("project-tab")){   
         
         clearContent();       
         clearSidebarActiveState()
@@ -192,13 +200,13 @@ document.addEventListener("click", function(e){
         
     }
 
-    if(e.target.classList.contains("inbox")){
-        clearContent();
-        clearSidebarActiveState()
+    // if(e.target.classList.contains("inbox")){
+    //     clearContent();
+    //     clearSidebarActiveState()
     
-        e.target.classList.add("active");    
-        renderAllTodo();
-    }
+    //     e.target.classList.add("active");    
+    //     renderAllTodo();
+    // }
 
     if(e.target.classList.contains("remove-project")){
         List.removeProject(e.target.parentElement.firstChild.textContent);
@@ -213,8 +221,17 @@ document.addEventListener("click", function(e){
     }
 
     if(e.target.classList.contains("remove-task")){
-        console.log("Remove Task");
+        let projectName = document.querySelector(".active").firstChild.textContent;
+        let taskName = e.target.parentElement.firstChild.textContent;
+
+        let project = List.getProject(projectName);
+        project.removeToDo(taskName);
+        clearContent();
+        project.toDoList.forEach(todo => {
+            appendTodo(todo);
+        });
         
+
     }
 });
 
