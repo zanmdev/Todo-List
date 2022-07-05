@@ -2,7 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    font-family: 'Roboto', sans-serif;
 }
 
 body{
@@ -21,6 +22,16 @@ html, body {
 /* Header Styles */
 .header{
     padding: 15px;
+}
+
+.header, .footer{
+    background-color: rgb(46, 40, 40);
+    color: white;
+    font-weight: bold;
+}
+
+.footer{
+    text-align: center;
 }
 
 /* Modal Styles */
@@ -70,9 +81,11 @@ html, body {
 
 #addTask{
     position: fixed;
-    bottom: 25px;
+    bottom: 45px;
     right: 25px;
 }
+
+
 
 /* Task Box Styles */
 
@@ -80,7 +93,7 @@ html, body {
     height: 100%;
     overflow: scroll;
     display: grid;
-    grid-template-rows: repeat(auto-fill, minmax(100px,1fr));
+    grid-template-rows: repeat(auto-fill, minmax(75px,1fr));
     gap: 20px;
     padding-top: 25px;
 }
@@ -90,12 +103,21 @@ html, body {
     display: flex;
     flex-direction: column;
     justify-self: center;
+    border: 1px solid black;
+    padding: 15px;
 }
 
 .task-title{
     display: flex;
     justify-content: space-between;
-    
+    border-bottom: 1px solid black;
+    margin-bottom: 5px;
+}
+
+
+
+.u3{
+    background-color: rgb(240, 169, 169);
 }
 
 
@@ -108,6 +130,7 @@ html, body {
     flex-direction: column;
     justify-content: space-between;
     width: 250px;
+    font-size: 18px;
 }
 
 .projects-container{
@@ -121,7 +144,19 @@ html, body {
     justify-content: space-between;
 }
 
+.project-tab:hover, .sidebar-project:hover{
+    background-color: rgb(199, 190, 190);
+}
+
+.project-tab:active, .sidebar-project:active{
+    background-color: rgb(148, 141, 141);
+}
+
 .active{
-    background-color: rgb(129, 123, 123);
+    background-color: rgb(199, 190, 190);
+}
+
+.remove-project{
+    padding-right: 5px;
 }
 

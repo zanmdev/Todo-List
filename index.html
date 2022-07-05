@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Doer</title>
     <link rel="stylesheet" href="./style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+        </style> 
 </head>
 <body>
 
@@ -27,13 +30,7 @@
 
                     <label for="task-urgency">Urgency Level</label>
                     <input id = "task-urgency" type="number" min="1" max="3" placeholder="1">
-                </div>
-
-                <div class="task-input">
-                    <label for="task-notes">Notes:</label>
-                    <textarea  id="task-notes" cols="30" rows="10"></textarea>
-                </div>
-                  
+                </div>              
             </form>
             <button id="add-task">+Add Task</button>  
             
@@ -62,7 +59,7 @@
         <div class="sidebar">
             <div>
                 <ul>
-                    <li class="inbox active">Inbox</li>
+                    <li class="project-tab inbox active">Inbox</li>
                     <li class="day">Tomorrow</li>
                     <li class="week">This Week</li>
                 </ul>
@@ -82,9 +79,9 @@
         <button id="addTask">+ Task</button>
     </div>
 
-    <!-- <div class="footer">
+    <div class="footer">
         <p>Created by zanmdev (github link here)</p>
-    </div> -->
+    </div>
     <script src="./main.js"></script>
 </body>
 </html>
