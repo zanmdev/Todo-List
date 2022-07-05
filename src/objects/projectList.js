@@ -18,8 +18,8 @@ function getProject(projName){
 function removeProject(projName){
     for (let index = 0; index < projects.length; index++) {
         if(projName === projects[index].name){
-            projects.splice(index, 1)
-            index--
+            projects.splice(index, 1);
+            index--;
         }
     }
 }

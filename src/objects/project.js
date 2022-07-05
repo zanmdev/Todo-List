@@ -10,8 +10,14 @@ class Project {
         this.toDoList.push(todo);
     }
 
-    removeToDo(todo){
-
+    removeToDo(todoName){
+        for (let index = 0; index < this.toDoList.length; index++) {
+            const element = this.toDoList[index];
+            if (element.name == todoName) {
+                this.toDoList.splice(index,1);
+                index--;
+            }
+        }
     }
 
 

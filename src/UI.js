@@ -42,6 +42,7 @@ function appendTodo(todo){
     
     toDoDiv.classList.add("task");
     toDoTitleDiv.classList.add("task-title");
+    closeBtn.classList.add("remove-task");
 
     toDoName.textContent = todo.name;
     toDoDesc.textContent = todo.description;
@@ -158,6 +159,12 @@ function addProjectInput(){
     
 }
 
+function clearSidebarActiveState(){
+    let sidebar = document.querySelector(".sidebar > div > ul > li.active");
+    if(sidebar != null){  
+        sidebar.classList.remove("active");
+    }
+}
 
 document.addEventListener("click", function(e){
     if(e.target && e.target.id == "addTask"){
@@ -172,11 +179,8 @@ document.addEventListener("click", function(e){
 
     if(e.target.classList[0] == "project-tab"){   
         
-        clearContent();
-        
-        let sidebar = document.querySelector(".sidebar > div > ul > li.active");
-
-        sidebar.classList.remove("active");
+        clearContent();       
+        clearSidebarActiveState()
     
         e.target.classList.add("active");   
         let project = List.getProject(e.target.firstChild.textContent);
@@ -190,8 +194,7 @@ document.addEventListener("click", function(e){
 
     if(e.target.classList.contains("inbox")){
         clearContent();
-        let sidebar = document.querySelector(".sidebar > div > ul > li.active");
-        sidebar.classList.remove("active");
+        clearSidebarActiveState()
     
         e.target.classList.add("active");    
         renderAllTodo();
@@ -199,7 +202,19 @@ document.addEventListener("click", function(e){
 
     if(e.target.classList.contains("remove-project")){
         List.removeProject(e.target.parentElement.firstChild.textContent);
-        e.target.parentElement.remove();     
+        e.target.parentElement.remove();  
+        let sidebar = document.querySelector(".sidebar > div > ul > li.active");
+        if(sidebar == null){
+            clearContent();
+            renderAllTodo();
+            let inboxTab = document.querySelector(".inbox");
+            inboxTab.classList.add("active");
+        }
+    }
+
+    if(e.target.classList.contains("remove-task")){
+        console.log("Remove Task");
+        
     }
 });
 
