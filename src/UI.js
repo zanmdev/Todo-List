@@ -71,11 +71,11 @@ function appendTodo(todo){
 
 function renderAllProjects(){  
     //Append Projects DOM to Sidebar 
-    
+    console.log(localStorage.getItem("taskList"));
     Storage.populateList();
     const projects = List.getAllProjects();
     projects.forEach(project => {
-        if(project.name !="Inbox"){
+        if(project.name !="Inbox" && project.name !="Today" && project.name != "Week"){
             appendProject(project); 
         }
         
@@ -145,14 +145,12 @@ function addTaskInput(){
     const taskDate = document.querySelector("#task-due");
     const taskUrgency = document.querySelector("#task-urgency");
 
-    //Get active project tab.
-    let activeProject = document.querySelector(".sidebar > div > ul > li.active");
+    //Get active project tab name.
+    let projectName = document.querySelector(".sidebar > div > ul > li.active").firstChild.textContent;
 
-    //Find project and create new task. Then append to content div.
-    let project = List.getProject(activeProject.firstChild.textContent);
+    //Create new task add to storage. Then append to content div.
     let newTask = new Todo(taskName.value, taskDescription.value, taskDate.value, taskUrgency.value);
-    console.log(project);
-    project.addToDo(newTask);
+    Storage.addTaskToStorage(projectName, newTask);
     appendTodo(newTask);
     hideTaskModal();
 }
@@ -174,11 +172,6 @@ function addProjectInput(){
         alert("Project Already Exists");
     }
 
-    
-}
-
-function addToLocalStorage(project){
-    localStorage.setItem(project.name,JSON.stringify(project));
     
 }
 
@@ -227,7 +220,7 @@ document.addEventListener("click", function(e){
     if(e.target.classList.contains("remove-project")){
         Storage.removeProjectFromStorage(e.target.parentElement.firstChild.textContent);
         e.target.parentElement.remove();  
-        let sidebar = document.querySelector(".sidebar > div > ul > li.active");
+        let sidebar = document.querySelector(".active");
         if(sidebar == null){
             clearContent();
             renderAllTodo();

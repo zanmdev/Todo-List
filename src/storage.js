@@ -8,14 +8,19 @@ function checkStorage(){
 }
 
 function populateList(){
-    const savedTaskList = JSON.parse(localStorage.getItem("taskList"));
-    savedTaskList.forEach(project => {
-       List.addProject(Object.assign(new Project(project.name, project.description, project.toDoList),project));
-    });
+    if (checkStorage()){
+        const savedTaskList = JSON.parse(localStorage.getItem("taskList"));
+        savedTaskList.forEach(project => {
+           List.addProject(Object.assign(new Project(project.name, project.description, project.toDoList),project));
+        });
+    }else{
+        emptyStorage();
+    }
+
 
 }
 
-function emptyLocal(){
+function emptyStorage(){
     List.addProject(new Project("Inbox"));
     List.addProject(new Project("Today"));
     List.addProject(new Project("Week"));
@@ -29,6 +34,10 @@ function addProjectToStorage(project){
 }
 
 function addTaskToStorage(projectName, task){
+    let project = List.getProject(projectName);
+    project.addToDo(task);
+    localStorage.setItem("taskList",JSON.stringify(List.getAllProjects()));
+
 
 }
 
