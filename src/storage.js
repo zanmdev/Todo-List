@@ -47,7 +47,9 @@ function removeProjectFromStorage(projectName){
 }
 
 function removeTaskFromStorage(projectName, taskName){
-
+    let project = List.getProject(projectName);
+    project.removeToDo(taskName);
+    localStorage.setItem("taskList", JSON.stringify(List.getAllProjects()));
 }
 
 export {checkStorage, populateList, addProjectToStorage,addTaskToStorage,removeProjectFromStorage, removeTaskFromStorage};

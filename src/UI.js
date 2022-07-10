@@ -69,9 +69,8 @@ function appendTodo(todo){
     todoContainer.appendChild(toDoDiv);
 }
 
-function renderAllProjects(){  
+function initialPageLoad(){  
     //Append Projects DOM to Sidebar 
-    console.log(localStorage.getItem("taskList"));
     Storage.populateList();
     const projects = List.getAllProjects();
     projects.forEach(project => {
@@ -80,6 +79,12 @@ function renderAllProjects(){
         }
         
     });
+
+    List.getProject("Inbox").toDoList.forEach(todo => {
+        appendTodo(todo);
+    });
+
+
     
     
 }
@@ -148,11 +153,18 @@ function addTaskInput(){
     //Get active project tab name.
     let projectName = document.querySelector(".sidebar > div > ul > li.active").firstChild.textContent;
 
-    //Create new task add to storage. Then append to content div.
-    let newTask = new Todo(taskName.value, taskDescription.value, taskDate.value, taskUrgency.value);
-    Storage.addTaskToStorage(projectName, newTask);
-    appendTodo(newTask);
-    hideTaskModal();
+    //Check if task name is in use then creates new task add to storage. Then append to content div.
+    if(List.getProject(projectName).getTask(taskName.value) == undefined){
+        let newTask = new Todo(taskName.value, taskDescription.value, taskDate.value, taskUrgency.value);
+        Storage.addTaskToStorage(projectName, newTask);
+        appendTodo(newTask);
+        hideTaskModal();
+    }else{
+        alert("Task name needs to be different");
+    }
+
+
+
 }
 
 function addProjectInput(){
@@ -232,9 +244,9 @@ document.addEventListener("click", function(e){
     if(e.target.classList.contains("remove-task")){
         let projectName = document.querySelector(".active").firstChild.textContent;
         let taskName = e.target.parentElement.firstChild.textContent;
-
+        Storage.removeTaskFromStorage(projectName, taskName);
         let project = List.getProject(projectName);
-        project.removeToDo(taskName);
+        // project.removeToDo(taskName);
         clearContent();
         project.toDoList.forEach(todo => {
             appendTodo(todo);
@@ -257,4 +269,4 @@ addProjectBtn.addEventListener("click",addProjectInput);
 
 
 
-export {renderAllTodo,renderAllProjects,createAddToDoBtn};
+export {renderAllTodo,initialPageLoad,createAddToDoBtn};

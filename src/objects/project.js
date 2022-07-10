@@ -20,6 +20,12 @@ class Project {
         }
     }
 
+    getTask(taskName){
+        return this.toDoList.find( ({ name }) => name === taskName );
+    }
+
+
+
 
 }
 

@@ -3,8 +3,7 @@ import * as uiFN from "./UI";
 import * as listFN from "./objects/projectList";
 
 function initialPageLoad(){
-
-    uiFN.renderAllProjects();
+    uiFN.initialPageLoad();
 
 
 }
