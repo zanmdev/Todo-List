@@ -29,11 +29,24 @@ html, body {
     color: white;
     font-weight: bold;
 }
+ /* Footer  */
 
 .footer{
     text-align: center;
 }
 
+
+.footer > p > a:visited{
+    color: rgb(164, 153, 153);
+    text-decoration: none;
+}
+
+.footer > p > a{
+    color: white
+}
+.footer > p > a:hover{
+    color: white
+}
 /* Modal Styles */
 
 #modal{
@@ -79,11 +92,14 @@ html, body {
     flex: 1 0 auto;
 }
 
-#addTask{
+#add-task{
+    display: block;
     position: fixed;
     bottom: 45px;
     right: 25px;
 }
+
+
 
 
 
@@ -118,6 +134,24 @@ html, body {
 
 .u3{
     background-color: rgb(240, 169, 169);
+}
+
+
+.remove-task{
+    color: white;
+    text-align: center;
+    background-color: rgb(99, 91, 91);
+    padding: 1px;
+    height: 20px;
+    width: 20px;
+}
+
+.remove-task:hover{
+    background-color: rgb(175, 162, 162);
+}
+
+.remove-task:active{
+    background-color: rgb(99, 91, 91);
 }
 
 
@@ -157,6 +191,19 @@ html, body {
 }
 
 .remove-project{
-    padding-right: 5px;
+    color: white;
+    margin-right: 5px;
+    background: rgb(99, 91, 91);;
+    text-align: center;
+    width: 20px;
+}
+
+
+.remove-project:hover{
+    background-color: rgb(175, 162, 162);
+}
+
+.remove-project:active{
+    background-color: rgb(99, 91, 91);
 }
 

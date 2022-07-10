@@ -28,8 +28,8 @@ function getAllTasksDateToday(){
     const todayTasks = [];
     projects.forEach(project => {
         project.toDoList.forEach(todo => {
-            if (isToday((parse(test,'yyyy-MM-dd', new Date())))){
-                todayTasks.pop(todo);
+            if (isToday((parse(todo.dueDate,'yyyy-MM-dd', new Date())))){
+                todayTasks.push(todo);
             }
         });
     });
@@ -40,8 +40,8 @@ function getAllTasksDateWeek(){
     const thisWeekTasks = [];
     projects.forEach(project => {
         project.toDoList.forEach(todo => {
-            if (isThisWeek((parse(test,'yyyy-MM-dd', new Date())))){
-                thisWeekTasks.pop(todo);
+            if (isThisWeek((parse(todo.dueDate,'yyyy-MM-dd', new Date())))){
+                thisWeekTasks.push(todo);
             }
         });
     });
