@@ -1,5 +1,3 @@
-import * as uiFN from "../UI"
-
 let projects = [];
 
 function addProject(project){

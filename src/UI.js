@@ -1,6 +1,8 @@
 import Project from "./objects/project";
 import Todo from "./objects/todo";
 import * as List from "./objects/projectList";
+import * as Storage from "./storage";
+
 
 const content = document.querySelector(".content");
 const modal = document.querySelector("#modal");
@@ -69,6 +71,8 @@ function appendTodo(todo){
 
 function renderAllProjects(){  
     //Append Projects DOM to Sidebar 
+    
+    Storage.populateList();
     const projects = List.getAllProjects();
     projects.forEach(project => {
         if(project.name !="Inbox"){
@@ -107,18 +111,21 @@ function createAddToDoBtn(){
 }
 
 function showTaskModal(){
+    //Show modal for task input while hiding project input modal
     projectModal.style.display = "none";
     modal.style.display = "block";
     taskModal.style.display = "block";
 }
 
 function showProjectModal(){
+    //Show project input modal while hiding task input modal.
     taskModal.style.display = "none";
     modal.style.display = "block";
     projectModal.style.display = "block";
 }
 
 function hideTaskModal(){
+    //Hide all modals
     modal.style.display = "none";
     taskModal.style.display = "none";
     projectModal.style.display = "none";
@@ -132,16 +139,16 @@ function clearContent(){
 }
 
 function addTaskInput(){
+    //Get task input values.
     const taskName = document.querySelector("#task-name");
     const taskDescription = document.querySelector("#task-description");
     const taskDate = document.querySelector("#task-due");
     const taskUrgency = document.querySelector("#task-urgency");
 
-
-
-
+    //Get active project tab.
     let activeProject = document.querySelector(".sidebar > div > ul > li.active");
 
+    //Find project and create new task. Then append to content div.
     let project = List.getProject(activeProject.firstChild.textContent);
     let newTask = new Todo(taskName.value, taskDescription.value, taskDate.value, taskUrgency.value);
     console.log(project);
@@ -151,12 +158,16 @@ function addTaskInput(){
 }
 
 function addProjectInput(){
+    //Get project input values
     const projectName = document.querySelector("#project-name");
     const projectDescription = document.querySelector("#project-description");
-    
+
+    //Check if project exists already before creating and appending
     if(List.getProject(projectName.value) === undefined){
         const newProject = new Project(projectName.value, projectDescription.value);
-        List.addProject(newProject);
+        // addToLocalStorage(newProject);
+        // List.addProject(newProject);
+        Storage.addProjectToStorage(newProject);
         appendProject(newProject);
         hideTaskModal();
     }else{
@@ -166,7 +177,13 @@ function addProjectInput(){
     
 }
 
+function addToLocalStorage(project){
+    localStorage.setItem(project.name,JSON.stringify(project));
+    
+}
+
 function clearSidebarActiveState(){
+    //Clear any sidebar tab that is currently active
     let sidebar = document.querySelector(".sidebar > div > ul > li.active");
     if(sidebar != null){  
         sidebar.classList.remove("active");
@@ -177,7 +194,6 @@ function clearSidebarActiveState(){
 document.addEventListener("click", function(e){
     if(e.target && e.target.id == "addTask"){
         //Open Add Task modal.
-        console.log("TASK ADDED");
         showTaskModal();
     } 
     
@@ -209,7 +225,7 @@ document.addEventListener("click", function(e){
     // }
 
     if(e.target.classList.contains("remove-project")){
-        List.removeProject(e.target.parentElement.firstChild.textContent);
+        Storage.removeProjectFromStorage(e.target.parentElement.firstChild.textContent);
         e.target.parentElement.remove();  
         let sidebar = document.querySelector(".sidebar > div > ul > li.active");
         if(sidebar == null){
