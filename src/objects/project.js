@@ -1,3 +1,5 @@
+import {isToday, parse} from "date-fns"
+
 class Project {
 
     constructor(projName, projDesc, todos = []){
@@ -14,6 +16,8 @@ class Project {
         for (let index = 0; index < this.toDoList.length; index++) {
             const element = this.toDoList[index];
             if (element.name == todoName) {
+                const test = this.toDoList[index].dueDate;
+                console.log(isToday(parse(test,'yyyy-MM-dd', new Date())));
                 this.toDoList.splice(index,1);
                 index--;
             }

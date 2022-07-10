@@ -14,13 +14,13 @@ function populateList(){
            List.addProject(Object.assign(new Project(project.name, project.description, project.toDoList),project));
         });
     }else{
-        emptyStorage();
+        populateEmptyStorage();
     }
 
 
 }
 
-function emptyStorage(){
+function populateEmptyStorage(){
     List.addProject(new Project("Inbox"));
     List.addProject(new Project("Today"));
     List.addProject(new Project("Week"));

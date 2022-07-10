@@ -4,7 +4,6 @@ import * as List from "./objects/projectList";
 import * as Storage from "./storage";
 
 
-const content = document.querySelector(".content");
 const modal = document.querySelector("#modal");
 const projectModal = document.querySelector("#project-modal");
 const taskModal = document.querySelector("#task-modal");
@@ -45,7 +44,6 @@ function appendTodo(todo){
     toDoDiv.classList.add("task");
     toDoTitleDiv.classList.add("task-title");
     closeBtn.classList.add("remove-task");
-    
 
     toDoName.textContent = todo.name;
     toDoDesc.textContent = todo.description;
@@ -77,7 +75,6 @@ function initialPageLoad(){
         if(project.name !="Inbox" && project.name !="Today" && project.name != "Week"){
             appendProject(project); 
         }
-        
     });
 
     List.getProject("Inbox").toDoList.forEach(todo => {
@@ -106,13 +103,6 @@ function appendProject(project){
 
 
     
-}
-
-function createAddToDoBtn(){
-    const toDoBtn = document.createElement("button");
-    toDoBtn.textContent = "+ Add Task";
-    toDoBtn.id ="addTask";
-    todoContainer.appendChild(toDoBtn);
 }
 
 function showTaskModal(){
@@ -221,13 +211,12 @@ document.addEventListener("click", function(e){
         
     }
 
-    // if(e.target.classList.contains("inbox")){
-    //     clearContent();
-    //     clearSidebarActiveState()
+    if(e.target.classList.contains("day")){
+        clearContent();
+        clearSidebarActiveState()
     
-    //     e.target.classList.add("active");    
-    //     renderAllTodo();
-    // }
+        e.target.classList.add("active");    
+    }
 
     if(e.target.classList.contains("remove-project")){
         Storage.removeProjectFromStorage(e.target.parentElement.firstChild.textContent);
@@ -269,4 +258,4 @@ addProjectBtn.addEventListener("click",addProjectInput);
 
 
 
-export {renderAllTodo,initialPageLoad,createAddToDoBtn};
+export {initialPageLoad};
