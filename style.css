@@ -144,11 +144,11 @@ html, body {
     justify-content: space-between;
 }
 
-.project-tab:hover, .sidebar-project:hover{
+.project-tab:hover, .sidebar-project:hover, .inbox:hover, .day:hover, .week:hover{
     background-color: rgb(199, 190, 190);
 }
 
-.project-tab:active, .sidebar-project:active{
+.project-tab:active, .sidebar-project:active, .inbox:active, .day:active, .week:active{
     background-color: rgb(148, 141, 141);
 }
 
