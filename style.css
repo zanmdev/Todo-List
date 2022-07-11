@@ -76,6 +76,20 @@ html, body {
     margin-bottom: 15px;
 }
 
+#modal-add-task, #add-project{
+    padding: 10px;
+    border: none;
+    background-color: #595555;;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 10px;
+}
+
+#modal-add-task:active, #add-project:active{
+    background-color: #918d8d;
+}
+
 /* Task Modal: to keep date and urgency on the same line */
 .row3{
     display: flex;
@@ -97,7 +111,24 @@ html, body {
     position: fixed;
     bottom: 45px;
     right: 25px;
+    font-size: 34px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: none;
+    box-shadow: 5px 4px #d5c5c5;
+    background: #595555;
+    color: white;
 }
+
+#add-task:hover{
+    background: #918d8d;
+}
+
+#add-task:active{
+    background: #8b8787;
+}
+
 
 
 
