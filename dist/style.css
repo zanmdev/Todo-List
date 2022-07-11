@@ -196,6 +196,7 @@ html, body {
     justify-content: space-between;
     width: 250px;
     font-size: 18px;
+    border-right: 1px solid black;
 }
 
 .projects-container{
