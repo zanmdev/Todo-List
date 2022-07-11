@@ -222,9 +222,14 @@ function addTaskInput(){
     //Check if task name is in use then creates new task add to storage. Then append to content div.
     if(List.getProject(projectName).getTask(taskName.value) == undefined){
         let newTask = new Todo(taskName.value, taskDescription.value, taskDate.value, taskUrgency.value);
+        taskName.value = " ";
+        taskDescription.value = " ";
+        taskDate.value = " ";
+        taskUrgency.value = "1";
         Storage.addTaskToStorage(projectName, newTask);
         appendTodo(newTask);
         hideModal();
+
     }else{
         alert("Task name needs to be different");
     }
@@ -241,8 +246,9 @@ function addProjectInput(){
     //Check if project exists already before creating and appending
     if(List.getProject(projectName.value) === undefined){
         const newProject = new Project(projectName.value, projectDescription.value);
-        // addToLocalStorage(newProject);
-        // List.addProject(newProject);
+
+        projectName.value = "";
+        projectDescription.value = "";
         Storage.addProjectToStorage(newProject);
         appendProject(newProject);
         hideModal();
