@@ -56,12 +56,6 @@ function createEventListeners(){
             });
         }
 
-        // if(e.target.classList.contains("week")){
-        //     addTaskBtn.style.display = 'none';
-        //     clearContent();
-        //     clearSidebarActiveState();
-        //     e.target.classList.add("active");  
-        // }
     
         if(e.target.classList.contains("remove-project")){
             Storage.removeProjectFromStorage(e.target.parentElement.firstChild.textContent);
@@ -69,9 +63,11 @@ function createEventListeners(){
             let sidebar = document.querySelector(".active");
             if(sidebar == null){
                 clearContent();
-                renderAllTodo();
                 let inboxTab = document.querySelector(".inbox");
                 inboxTab.classList.add("active");
+                List.getProject("Inbox").toDoList.forEach(todo => {
+                    appendTodo(todo);
+                });
             }
         }
     
